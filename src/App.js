@@ -49,9 +49,8 @@ function App() {
       .finally(() => setIsLoading(false));
   };
 
-  const openModal = e => {
-    if (e.target.nodeName !== 'IMG') return;
-    setLargeImgUrl(e.target.dataset.url);
+  const openModal = data => {
+    setLargeImgUrl(data);
   };
 
   const closeModal = () => {

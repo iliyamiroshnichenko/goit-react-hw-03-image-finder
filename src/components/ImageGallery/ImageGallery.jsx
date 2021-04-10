@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 
 const ImageGallery = ({ images, onClick }) => {
   return (
-    <ul className="ImageGallery" onClick={onClick}>
+    <ul className="ImageGallery">
       {images.map(({ id, webformatURL, largeImageURL }) => (
         <ImageGalleryItem
+          onClick={onClick}
           key={id}
           webformatURL={webformatURL}
           largeImageURL={largeImageURL}
@@ -21,7 +22,6 @@ ImageGallery.propTypes = {
       id: PropTypes.number.isRequired,
     }),
   ).isRequired,
-  onClick: PropTypes.func.isRequired,
 };
 
 export default ImageGallery;
