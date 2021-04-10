@@ -12,7 +12,6 @@ const SearchBar = ({ onSubmit }) => {
     e.preventDefault();
     onSubmit(query);
     setQuery('');
-    e.currentTarget.reset();
   };
 
   return (
@@ -24,6 +23,7 @@ const SearchBar = ({ onSubmit }) => {
 
         <input
           className="SearchForm-input"
+          value={query}
           type="text"
           autoComplete="off"
           autoFocus
