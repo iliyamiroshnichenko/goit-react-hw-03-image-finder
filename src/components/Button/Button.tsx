@@ -1,6 +1,10 @@
 import PropTypes from 'prop-types';
 
-const Button = ({ onClick }) => {
+interface IButton {
+  onClick: () => void;
+}
+
+const Button = ({ onClick }: IButton) => {
   return (
     <button type="button" className="Button" onClick={onClick}>
       Load more

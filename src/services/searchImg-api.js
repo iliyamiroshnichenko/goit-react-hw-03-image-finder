@@ -15,4 +15,5 @@ const fetchImages = ({
     .then(({ data: { hits } }) => hits);
 };
 
+// eslint-disable-next-line
 export default { fetchImages };

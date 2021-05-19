@@ -6,20 +6,28 @@ import Button from './components/Button';
 import Loader from './components/Loader';
 import Modal from './components/Modal';
 
+interface IImage {
+  id: string | number;
+  webformatURL: string;
+  largeImageURL: string;
+  [n: string]: any;
+}
+
 function App() {
-  const [images, setImages] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [largeImgUrl, setLargeImgUrl] = useState('');
+  const [images, setImages] = useState<any[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+  const [largeImgUrl, setLargeImgUrl] = useState<string>('');
 
   useEffect(() => {
     if (!searchQuery) return;
     fetchArticles();
+    // eslint-disable-next-line
   }, [searchQuery]);
 
-  const onChangeQuery = query => {
+  const onChangeQuery = (query: string) => {
     setSearchQuery(query);
     setImages([]);
     setCurrentPage(1);
@@ -33,11 +41,13 @@ function App() {
     searchImgApi
       .fetchImages(options)
       .then(hits => {
-        const imgData = hits.map(({ id, webformatURL, largeImageURL }) => ({
-          id,
-          webformatURL,
-          largeImageURL,
-        }));
+        const imgData = hits.map(
+          ({ id, webformatURL, largeImageURL }: IImage) => ({
+            id,
+            webformatURL,
+            largeImageURL,
+          }),
+        );
         setImages(prState => [...prState, ...imgData]);
         setCurrentPage(prState => prState + 1);
         window.scrollTo({
@@ -49,7 +59,7 @@ function App() {
       .finally(() => setIsLoading(false));
   };
 
-  const openModal = data => {
+  const openModal = (data: string) => {
     setLargeImgUrl(data);
   };
 

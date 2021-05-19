@@ -1,14 +1,18 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-const SearchBar = ({ onSubmit }) => {
+interface IProps {
+  onSubmit: (query: string) => void;
+}
+
+const SearchBar = ({ onSubmit }: IProps) => {
   const [query, setQuery] = useState('');
 
-  const handleChange = e => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.currentTarget.value);
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSubmit(query);
     setQuery('');

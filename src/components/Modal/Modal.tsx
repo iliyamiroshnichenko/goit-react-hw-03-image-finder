@@ -1,10 +1,15 @@
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
-const modalRoot = document.querySelector('#modal-root');
+const modalRoot = document.querySelector('#modal-root') as HTMLElement;
 
-const Modal = ({ onClose, children }) => {
+interface IModal {
+  onClose: () => void;
+  children?: React.ReactNode;
+}
+
+const Modal = ({ onClose, children }: IModal) => {
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
     return () => {
@@ -12,13 +17,13 @@ const Modal = ({ onClose, children }) => {
     };
   });
 
-  const handleKeyDown = e => {
+  const handleKeyDown = (e: KeyboardEvent) => {
     if (e.code === 'Escape') {
       onClose();
     }
   };
 
-  const handleBackdropClick = e => {
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.currentTarget === e.target) {
       onClose();
     }
@@ -32,13 +37,13 @@ const Modal = ({ onClose, children }) => {
   );
 };
 
-Modal.defaultProps = {
-  children: null,
-};
+// Modal.defaultProps = {
+//   children: null,
+// };
 
-Modal.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  children: PropTypes.node,
-};
+// Modal.propTypes = {
+//   onClose: PropTypes.func.isRequired,
+//   children: PropTypes.node,
+// };
 
 export default Modal;
